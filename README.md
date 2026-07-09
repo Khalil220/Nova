@@ -46,7 +46,7 @@ Sorting ignores leading articles and sorts authors by surname ("The Hobbit" unde
 - **Maximum loaded chapters** — cap on how many chapters stay in memory at once.
 - **Autosave interval** — how often your position (and, for library books, reading progress) is saved while reading. Closing the book always saves immediately.
 - **Maximum recent files** — length of the File > Recent list.
-- **Highlight color** — background color for highlights, chosen from a list of named colors.
+- **Highlight color** — the background color drawn behind highlighted text.
 - **Log level / retention** — how chatty the log file is and how many days are kept.
 - **PDF table detection** — reconstruct aligned text grids as tables. Works well on real tables; can misfire on unusual layouts like two-column verse, hence the switch.
 - **Automatically mark books finished** — reaching the end of a book sets it to Finished in the library.
