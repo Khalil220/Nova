@@ -1,6 +1,6 @@
 # Nova
 
-An ebook reader for Windows, written in Rust, for people who read with a screen reader.
+An accessible ebook reader for Windows, written in Rust.
 
 ## Formats
 
