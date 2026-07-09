@@ -1,8 +1,6 @@
 # Nova
 
-An ebook reader for Windows, written in Rust.
-
-The reading area is a standard Windows text control, so NVDA, JAWS and Narrator read it like any normal document, with their usual commands. The rest of the UI is plain menus and dialogs for the same reason.
+An ebook reader for Windows, written in Rust, for people who read with a screen reader.
 
 ## Formats
 
@@ -18,8 +16,6 @@ The reading area is a standard Windows text control, so NVDA, JAWS and Narrator 
 Tables are read out with their column headers ("Quarter: Q1; Revenue: 120"), images announce their alt text, nested lists use a different bullet per level, and DOCX footnotes and list numbering come through.
 
 ## Reading
-
-The book is one scrollable document with normal caret navigation, so screen reader reading commands behave as they would in any editor.
 
 - `Ctrl+T` — table of contents, opens on the chapter you're in, not the top
 - `Ctrl+G` — go to line or page
@@ -41,7 +37,7 @@ Sorting ignores leading articles and sorts authors by surname ("The Hobbit" unde
 
 ## Preferences (`Ctrl+P`)
 
-- **Font family / size** — reader font. The family box lists your installed fonts.
+- **Font family / size** — the font and size used in the reading area.
 - **Chapters to load ahead** — how far past your position Nova pre-loads (see below).
 - **Maximum loaded chapters** — cap on how many chapters stay in memory at once.
 - **Autosave interval** — how often your position (and, for library books, reading progress) is saved while reading. Closing the book always saves immediately.
@@ -61,7 +57,7 @@ Sorting ignores leading articles and sorts authors by surname ("The Hobbit" unde
 
 **PDF.** PDFium is loaded lazily the first time you open a PDF, so it costs nothing otherwise. Each page is a chapter. Text is rebuilt into reading order from the raw glyph positions; aligned grids can be detected as tables. If the PDF is tagged, Nova reads the structure tree directly — figure alt text and real table semantics — instead of guessing.
 
-**DOCX / MOBI / HTML / Markdown / DAISY.** Parsed once into titled chapters, split at headings, then read through the same chapter machinery as everything else. MOBI handles PalmDoc decompression itself; HUFF/CDIC books go through the mobi crate.
+**DOCX / MOBI / HTML / Markdown / DAISY.** Parsed once into titled chapters, split at headings, then read like everything else. MOBI handles PalmDoc decompression itself; HUFF/CDIC books go through the mobi crate.
 
 **When files are bad.** Malformed markup falls back to a regex extractor instead of failing, absurdly deep XML nesting is caught before it can overflow the stack, and corrupt files get an error dialog, not a crash.
 
