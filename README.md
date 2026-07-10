@@ -19,11 +19,13 @@ Tables are read out with their column headers ("Quarter: Q1; Revenue: 120"), ima
 
 - `Ctrl+T` — table of contents, opens on the chapter you're in, not the top
 - `Ctrl+G` — go to line or page
-- `Ctrl+F` / `F3` — find / find next
+- `Ctrl+F` / `F3` / `Shift+F3` — find, find next, find previous
 - `Ctrl+B` / `Ctrl+Shift+B` — add / manage bookmarks
 - `Ctrl+H` / `Ctrl+Shift+H` — highlight selection / manage highlights
 - `Alt+Left` / `Alt+Right` — navigation history
 - `Ctrl+Home` / `Ctrl+End` — start / end of the whole book
+
+Find searches the whole book, with Match case and Whole word options. It ignores differences in quotes, dashes, and accents — a straight apostrophe finds a curly one, `cafe` finds `café` — tells you "match 3 of 47" as you go, and highlights every match.
 
 Your position is autosaved and restored on reopen.
 
