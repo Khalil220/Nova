@@ -2,6 +2,15 @@
 
 An accessible ebook reader for Windows, written in Rust.
 
+## Installing
+
+Two ways to run Nova, from the [latest release](https://github.com/Khalil220/Nova/releases/latest):
+
+- **Installer** (`nova-setup-*.exe`) — a per-user install (no administrator prompt), with a Start-menu shortcut and an uninstaller. It can make Nova the default reader for the file types you choose (ebooks are pre-ticked; documents like PDF are offered unticked), and adds Nova to the "Open with" menu for every supported type. Your settings, library, and reading positions live in `%APPDATA%\Nova`, so they survive reinstalls and updates.
+- **Portable** (`nova-*-win-x64.zip`) — unzip anywhere and run `nova.exe`; no install, nothing written to the registry. All data stays in a `data` folder next to the executable, so the whole thing travels on a USB stick. (Portable mode is chosen automatically whenever a `data` folder or a `portable` marker file sits next to `nova.exe`.)
+
+Both are 64-bit Windows and self-update in place (Help → Check for Updates). To move a portable copy to an installed one, run the installer and copy your old `data` folder's contents into `%APPDATA%\Nova`.
+
 ## Formats
 
 - **EPUB** (2 and 3)
