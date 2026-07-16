@@ -49,7 +49,6 @@ Sorting ignores leading articles and sorts authors by surname ("The Hobbit" unde
 ## Preferences (`Ctrl+P`)
 
 - **Font family / size** — the font and size used in the reading area.
-- **Chapters kept loaded** — how many chapters stay in memory, split before and after your position (2–100). Higher means smoother scrolling in both directions at the cost of memory.
 - **Autosave interval** — how often your position (and, for library books, reading progress) is saved while reading. Closing the book always saves immediately.
 - **Maximum recent files** — length of the File > Recent list.
 - **Highlight color** — the background color drawn behind highlighted text.
@@ -61,7 +60,7 @@ Sorting ignores leading articles and sorts authors by surname ("The Hobbit" unde
 
 ## How it loads books
 
-**EPUB.** The zip is opened once and read randomly: when a chapter is needed, only that entry is decompressed, straight out of the archive. Chapters load in spine order in a sliding window around your position, and ones that fall outside it are dropped, so a 2,000-chapter book costs about the same memory as a 20-chapter one. Jumping via the TOC or Go To loads from the target, not everything before it.
+**EPUB.** The zip is opened once and read randomly: when a chapter is needed, only that entry is decompressed, straight out of the archive. Only a small working set of chapters is kept in memory at a time, so a 2,000-chapter book costs about the same as a 20-chapter one. Jumping via the TOC or Go To loads from the target, not everything before it.
 
 **Plain text.** Read once, decoded tolerantly (UTF-8 with or without BOM, UTF-16 either endianness, Windows-1252 fallback), then split into fixed-size sections that act as virtual chapters so navigation stays fast on 20 MB files.
 
