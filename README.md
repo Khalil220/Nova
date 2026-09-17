@@ -6,8 +6,8 @@ An accessible ebook reader for Windows, written in Rust.
 
 From the [latest release](https://github.com/Khalil220/Nova/releases/latest), pick one:
 
-- **Installer** (the `nova-setup` `.exe`) — per-user (no admin), and offers to make Nova the default reader for the types you tick (ebooks pre-ticked, documents like PDF not). Data lives in `%APPDATA%\Nova`.
-- **Portable** (the `.zip`) — keeps its data in a `data` folder beside `nova.exe`, and registers nothing. Nova uses this layout whenever a `data` folder or a `portable` marker sits next to the exe.
+- **Installer** (the `nova-setup` `.exe`): per-user (no admin), and offers to make Nova the default reader for the types you tick (ebooks pre-ticked, documents like PDF not). Data lives in `%APPDATA%\Nova`.
+- **Portable** (the `.zip`): keeps its data in a `data` folder beside `nova.exe`, and registers nothing. Nova uses this layout whenever a `data` folder or a `portable` marker sits next to the exe.
 
 To switch a portable copy to installed, run the installer and move your old `data` contents into `%APPDATA%\Nova`.
 
@@ -16,25 +16,25 @@ To switch a portable copy to installed, run the installer and move your old `dat
 - **EPUB** (2 and 3)
 - **PDF**
 - **DOCX**
+- **PPTX**: PowerPoint decks, one slide per chapter
 - **MOBI / AZW / AZW3 / PRC**
 - **Markdown**
 - **HTML / XHTML**
-- **Plain text** — UTF-8, UTF-16 and Windows-1252
-- **DAISY** — 2.02 (`ncc.html`) and DTBook XML
+- **Plain text**: UTF-8, UTF-16 and Windows-1252
+- **DAISY**: 2.02 (`ncc.html`) and DTBook XML
 
 Tables are read out with their column headers ("Quarter: Q1; Revenue: 120"), images announce their alt text, nested lists use a different bullet per level, and DOCX footnotes and list numbering come through.
 
 ## Reading
 
-- `Ctrl+T` — table of contents, opens on the chapter you're in, not the top
-- `Ctrl+G` — go to line or page
-- `Ctrl+F` / `F3` / `Shift+F3` — find, find next, find previous
-- `Ctrl+B` / `Ctrl+Shift+B` — add / manage bookmarks
-- `Ctrl+H` / `Ctrl+Shift+H` — highlight selection / manage highlights
-- `Alt+Left` / `Alt+Right` — navigation history
-- `Ctrl+Home` / `Ctrl+End` — start / end of the whole book
+- `Ctrl+T`: table of contents, opens on the chapter you're in
+- `Ctrl+G`: go to line or page
+- `Ctrl+F` / `F3` / `Shift+F3`: find, find next, find previous
+- `Ctrl+B` / `Ctrl+Shift+B`: add / manage bookmarks
+- `Ctrl+H` / `Ctrl+Shift+H`: highlight selection / manage highlights
+- `Alt+Left` / `Alt+Right`: navigation history
 
-Find searches the whole book, with Match case and Whole word options. It ignores differences in quotes, dashes, and accents — a straight apostrophe finds a curly one, `cafe` finds `café` — tells you "match 3 of 47" as you go, and highlights every match.
+Find searches the whole book, with Match case and Whole word options. It ignores differences in quotes, dashes, and accents. A straight apostrophe finds a curly one, `cafe` finds `café`. It tells you "match 3 of 47" as you go, and highlights every match.
 
 Your position is autosaved and restored on reopen.
 
@@ -48,25 +48,12 @@ Sorting ignores leading articles and sorts authors by surname ("The Hobbit" unde
 
 ## Preferences (`Ctrl+P`)
 
-- **Font family / size** — the font and size used in the reading area.
-- **Autosave interval** — how often your position (and, for library books, reading progress) is saved while reading. Closing the book always saves immediately.
-- **Maximum recent files** — length of the File > Recent list.
-- **Highlight color** — the background color drawn behind highlighted text.
-- **Log level / retention** — how chatty the log file is and how many days are kept.
-- **PDF table detection** — reconstruct aligned text grids as tables. Works well on real tables; can misfire on unusual layouts like two-column verse, hence the switch.
-- **Automatically mark books finished** — reaching the end of a book sets it to Finished in the library.
-- **Recognize re-reads** — reopening a finished book and starting over counts a new read.
-- **Library list** — show the author before the title, and/or compact rows (title and author only — less to listen to per row).
-
-## How it loads books
-
-**EPUB.** The zip is opened once and read randomly: when a chapter is needed, only that entry is decompressed, straight out of the archive. Only a small working set of chapters is kept in memory at a time, so a 2,000-chapter book costs about the same as a 20-chapter one. Jumping via the TOC or Go To loads from the target, not everything before it.
-
-**Plain text.** Read once, decoded tolerantly (UTF-8 with or without BOM, UTF-16 either endianness, Windows-1252 fallback), then split into fixed-size sections that act as virtual chapters so navigation stays fast on 20 MB files.
-
-**PDF.** PDFium is loaded lazily the first time you open a PDF, so it costs nothing otherwise. Each page is a chapter. Text is rebuilt into reading order from the raw glyph positions; aligned grids can be detected as tables. If the PDF is tagged, Nova reads the structure tree directly — figure alt text and real table semantics — instead of guessing.
-
-**DOCX / MOBI / HTML / Markdown / DAISY.** Parsed once into titled chapters, split at headings, then read like everything else. MOBI handles PalmDoc decompression itself; HUFF/CDIC books go through the mobi crate.
-
-**When files are bad.** Malformed markup falls back to a regex extractor instead of failing, absurdly deep XML nesting is caught before it can overflow the stack, and corrupt files get an error dialog, not a crash.
-
+- **Font family / size**: the font and size used in the reading area.
+- **Autosave interval**: how often your position (and, for library books, reading progress) is saved while reading. Closing the book always saves immediately.
+- **Maximum recent files**: length of the File > Recent list.
+- **Highlight color**: the background color drawn behind highlighted text.
+- **Log level / retention**: how verbose the log file is and how many days are kept.
+- **PDF table detection**: reconstruct aligned text grids as tables. Works well on real tables; can misfire on unusual layouts like two-column verse, hence the switch.
+- **Automatically mark books finished**: reaching the end of a book sets it to Finished in the library.
+- **Recognize re-reads**: reopening a finished book and starting over counts a new read.
+- **Library list**: show the author before the title, and/or compact rows (title and author only, less per row).
