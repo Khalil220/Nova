@@ -6,8 +6,8 @@ An accessible ebook reader, written primarily in Rust.
 
 From the [latest release](https://github.com/Khalil220/Nova/releases/latest), pick one:
 
-- **Installer** (the `nova-setup` `.exe`): per-user (no admin), and offers to make Nova the default reader for the types you tick (ebooks pre-ticked). Data lives in `%APPDATA%\Nova`.
-- **Portable** (the `.zip`): keeps its data in a `data` folder beside `nova-reader.exe`, and registers nothing. Nova uses this layout whenever a `data` folder or a `portable` marker sits next to the exe.
+- **Installer** (the `setup-x64.exe`): per-user (no admin), and offers to make Nova the default reader for the types you tick (ebooks pre-ticked). Data lives in `%APPDATA%\Nova`.
+- **Portable** (the `portable-x64.zip`): keeps its data in a `data` folder beside `nova-reader.exe`, and registers nothing. Nova uses this layout whenever a `data` folder or a `portable` marker sits next to the exe.
 - **Android** (the `.apk`): Android 8.0 or newer, installed directly rather than from the Play Store. Its data lives with the app, so uninstalling clears it.
 
 To switch a portable copy to installed, run the installer and move your old `data` contents into `%APPDATA%\Nova`.
